@@ -11,12 +11,16 @@ services:
   - type: web
     plan: free
     # This is the runtime for services that pull a prebuilt Docker image
-    runtime: image
-    # You can give the service any name
+    # runtime: image
+    # # You can give the service any name
+    # name: n8n-service
+    # image:
+    #   # Pulls the n8n image tagged as latest from Docker Hub
+    #   url: docker.io/n8nio/n8n:latest
     name: n8n-service
-    image:
-      # Pulls the n8n image tagged as latest from Docker Hub
-      url: docker.io/n8nio/n8n:latest
+    env: docker # Change this from 'image' to 'docker'
+    dockerfilePath: ./Dockerfile # This points to your new file
+    dockerContext: .
 
     # All environment variables defined below are required!
     #
@@ -28,6 +32,8 @@ services:
       # Do not modify this value after it's generated!
       # If you do, you'll lose access to all credentials
       # encrypted with the previous value.
+      - key: N8N_USER_MANAGEMENT_DISABLED
+        value: "false"
       - key: N8N_ENCRYPTION_KEY
         generateValue: true
 
