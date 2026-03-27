@@ -26,6 +26,8 @@ services:
     #
     # You can define additional environment variables as needed.
     envVars:
+      - key: NODES_EXCLUDE
+        value: "[]"
       # Generates a base64-encoded key for
       # encrypting credentials in n8n
       #
